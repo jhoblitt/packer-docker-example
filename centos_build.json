@@ -1,0 +1,34 @@
+{
+  "builders":[
+    {
+      "name": "6",
+      "type": "docker",
+      "image": "docker.io/centos:6",
+      "pull": false,
+      "commit": true
+    },
+    {
+      "name": "7",
+      "type": "docker",
+      "image": "docker.io/centos:7",
+      "pull": false,
+      "commit": true
+    }
+  ],
+  "provisioners":[
+    {
+      "type": "shell",
+      "environment_vars": [
+        "TAG={{user `tag`}}",
+        "PRODUCTS={{user `products`}}"
+      ],
+      "scripts": [
+        "build2.sh"
+      ]
+    }
+  ],
+  "variables": {
+    "tag": "",
+    "products": "lsst_apps"
+  }
+}
